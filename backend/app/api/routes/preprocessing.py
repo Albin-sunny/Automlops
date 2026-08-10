@@ -20,6 +20,12 @@ async def run_preprocessing(dataset_id: str):
             detail="Dataset not found"
         )
 
+    if "target_column" not in dataset:
+        raise HTTPException(
+            status_code=400,
+            detail="Target column not selected"
+        )
+
     result = await preprocess_dataset(
         dataset["path"],
         dataset_id,

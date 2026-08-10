@@ -1,44 +1,47 @@
-from fastapi import APIRouter, HTTPException
+from bson import ObjectId
+from bson.errors import InvalidId
+from fastapi import APIRouter, HTTPException, status
 
 from app.database import mongodb
 from app.services.training_services import train_models
 
-from bson import ObjectId
-
-
 router = APIRouter()
 
 
-@router.post("/{dataset_id}")
-async def start_training(
-    dataset_id: str,
-    target_column: str
-):
-
-    # Find dataset metadata
-
-    dataset = await mongodb.database.datasets.find_one(
-        {
-            "_id": ObjectId(dataset_id)
-        }
+@router.post("/{dataset_id}", status_code=status.HTTP_200_OK)
+async def start_training(dataset_id: str):
+  
+  try:
+    obj_id = ObjectId(dataset_id)
+  except InvalidId:
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Invalid dataset_id format",
     )
 
+ 
+  dataset = await mongodb.database.datasets.find_one({"_id": obj_id})
 
-    if not dataset:
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found"
-        )
-
-
-    file_path = dataset["path"]
-
-    processed_path = f"datasets/processed/processed_{dataset_id}.csv"
-
-    result = await train_models(
-        processed_path,
-        dataset_id,
-        target_column
+  if not dataset:
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="Dataset not found"
     )
 
-    return result
+  
+  target_column = dataset.get("target_column")
+  if not target_column:
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Target column not selected for this dataset",
+    )
+
+  processed_path = f"datasets/processed/processed_{dataset_id}.csv"
+
+  
+  result = await train_models(
+      file_path=processed_path,
+      dataset_id=dataset_id,
+      target_column=target_column,
+  )
+
+  return result

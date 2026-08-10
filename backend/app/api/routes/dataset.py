@@ -1,4 +1,7 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, HTTPException
+from bson import ObjectId
+
+from app.database import mongodb
 from app.services.dataset_services import process_dataset
 from app.services.dataset_services import fetch_all_datasets
 from app.services.dataset_services import fetch_dataset_by_id
@@ -28,3 +31,33 @@ async def get_dataset(dataset_id: str):
 async def delete_dataset_route(dataset_id: str):
 
     return await remove_dataset(dataset_id)
+
+
+@router.post("/{dataset_id}/select-target")
+async def select_target(
+    dataset_id: str,
+    target_column: str
+):
+
+    result = await mongodb.database.datasets.update_one(
+        {
+            "_id": ObjectId(dataset_id)
+        },
+        {
+            "$set": {
+                "target_column": target_column
+            }
+        }
+    )
+
+    if result.matched_count == 0:
+        raise HTTPException(
+            status_code=404,
+            detail="Dataset not found"
+        )
+
+    return {
+        "message": "Target column selected successfully",
+        "dataset_id": dataset_id,
+        "target_column": target_column
+    }

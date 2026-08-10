@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.api.router import router
+from app.api.monitoring import router as monitoring_router
+
 from app.database.mongodb import (
     connect_to_mongo,
     close_mongo_connection
@@ -26,6 +28,7 @@ app = FastAPI(
 )
 
 app.include_router(router)
+app.include_router(monitoring_router)
 
 
 @app.get("/")
@@ -33,3 +36,5 @@ async def root():
     return {
         "message": "Welcome to AutoMLOps API"
     }
+
+

@@ -6,6 +6,7 @@ from app.api.routes.dataset import router as dataset_router
 from app.api.routes import profiling
 from app.api.routes import preprocessing
 from app.api.routes import training
+from app.api.routes import prediction
 
 
 
@@ -46,4 +47,10 @@ router.include_router(
     training.router,
     prefix="/training",
     tags=["Training"]
+)
+
+router.include_router(
+    prediction.router,
+    prefix="/prediction",
+    tags=["Prediction"]
 )

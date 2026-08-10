@@ -1,0 +1,145 @@
+{
+  "timestamp": "2026-08-08T22:43:51.085479",
+  "monitoring_status": "WARNING",
+  "summary": {
+    "schema": "PASS",
+    "missing_data": "PASS",
+    "data_drift": "WARNING",
+    "drifted_features": 4
+  },
+  "reference": {
+    "rows": 32,
+    "columns": 5,
+    "statistics": {
+      "Duration": {
+        "mean": 68.4375,
+        "median": 60.0,
+        "std": 70.03959133831886,
+        "min": 30.0,
+        "max": 450.0
+      },
+      "Pulse": {
+        "mean": 103.5,
+        "median": 102.5,
+        "std": 7.8329329570523845,
+        "min": 90.0,
+        "max": 130.0
+      },
+      "Maxpulse": {
+        "mean": 128.5,
+        "median": 127.5,
+        "std": 12.998759246000514,
+        "min": 101.0,
+        "max": 175.0
+      },
+      "Calories": {
+        "mean": 304.68,
+        "median": 291.2,
+        "std": 66.00377941111952,
+        "min": 195.1,
+        "max": 479.0
+      }
+    }
+  },
+  "current": {
+    "rows": 15,
+    "columns": 5,
+    "statistics": {
+      "Duration": {
+        "mean": 317.3333333333333,
+        "median": 310.0,
+        "std": 57.87507070858584,
+        "min": 210.0,
+        "max": 420.0
+      },
+      "Pulse": {
+        "mean": 166.86666666666667,
+        "median": 166.0,
+        "std": 7.472489226361937,
+        "min": 155.0,
+        "max": 180.0
+      },
+      "Maxpulse": {
+        "mean": 218.06666666666666,
+        "median": 215.0,
+        "std": 12.764161136706537,
+        "min": 200.0,
+        "max": 245.0
+      },
+      "Calories": {
+        "mean": 882.1933333333334,
+        "median": 880.5,
+        "std": 99.77946014419334,
+        "min": 720.0,
+        "max": 1080.0
+      }
+    }
+  },
+  "drift": {
+    "schema": {
+      "missing_columns": [],
+      "extra_columns": [],
+      "dtype_changes": {}
+    },
+    "missing_values": {
+      "Calories": {
+        "reference_count": 2,
+        "current_count": 0,
+        "reference_rate": 0.0625,
+        "current_rate": 0.0,
+        "difference": -0.0625
+      },
+      "Date": {
+        "reference_count": 1,
+        "current_count": 0,
+        "reference_rate": 0.0312,
+        "current_rate": 0.0,
+        "difference": -0.0312
+      },
+      "Duration": {
+        "reference_count": 0,
+        "current_count": 0,
+        "reference_rate": 0.0,
+        "current_rate": 0.0,
+        "difference": 0.0
+      },
+      "Maxpulse": {
+        "reference_count": 0,
+        "current_count": 0,
+        "reference_rate": 0.0,
+        "current_rate": 0.0,
+        "difference": 0.0
+      },
+      "Pulse": {
+        "reference_count": 0,
+        "current_count": 0,
+        "reference_rate": 0.0,
+        "current_rate": 0.0,
+        "difference": 0.0
+      }
+    },
+    "drift_scores": {
+      "Calories": {
+        "ks_statistic": 1.0,
+        "p_value": 0.0,
+        "drift_detected": true
+      },
+      "Duration": {
+        "ks_statistic": 0.9688,
+        "p_value": 0.0,
+        "drift_detected": true
+      },
+      "Maxpulse": {
+        "ks_statistic": 1.0,
+        "p_value": 0.0,
+        "drift_detected": true
+      },
+      "Pulse": {
+        "ks_statistic": 1.0,
+        "p_value": 0.0,
+        "drift_detected": true
+      }
+    },
+    "overall_drift_detected": true
+  }
+}
