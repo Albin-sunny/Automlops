@@ -35,6 +35,8 @@ jobs:
       - name: Validate backend imports
         env:
           PYTHONPATH: backend
+          MLFLOW_ALLOW_FILE_STORE: "true"
+          MLFLOW_TRACKING_URI: "file:./mlruns"
         run: |
           python -c "import app.main; print('Backend import OK')"
 
