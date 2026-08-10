@@ -1,15 +1,48 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
 
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables
 .env
+.env.*
 
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Python cache/testing
+.pytest_cache/
+.mypy_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ML artifacts that should not be committed
 mlruns/
 
-artifacts/
+# MLflow generated artifacts
+mlartifacts/
 
-datasets/
+# Temporary files
+tmp/
+temp/
 
-.vscode/
+# Monitoring temporary reports
+app/data/temp/
 
-.idea/
+# Large/generated datasets
+# datasets/
