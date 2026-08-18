@@ -46,3 +46,9 @@ app/data/temp/
 
 # Large/generated datasets
 # datasets/
+
+
+# Agent files only
+backend/app/agent/
+backend/app/api/agent.py
+agent_uploads/

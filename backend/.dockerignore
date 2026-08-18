@@ -13,3 +13,9 @@ __pycache__/
 .mypy_cache/
 
 *.log
+
+mlflow.db
+mlruns/
+mlartifacts/
+
+datasets/

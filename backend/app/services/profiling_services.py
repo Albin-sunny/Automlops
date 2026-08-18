@@ -68,30 +68,3 @@ def calculate_quality_score(df, missing_values, duplicates):
 
 
 
-import asyncio
-
-
-# import asyncio
-# from app.database.mongodb import connect_to_mongo
-# import os
-
-
-# async def test_profile():
-#     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-#     file_path = os.path.join(BASE_DIR, "datasets", "dirtydata.csv")
-
-#     result = await generate_profile(file_path, "6a6909852286e4eb00243b0c")
-#     print(result)
-
-
-# if __name__ == "__main__":
-
-#     import asyncio
-
-#     async def main():
-
-#         await connect_to_mongo()
-
-#         await test_profile()
-
-#     asyncio.run(main())
